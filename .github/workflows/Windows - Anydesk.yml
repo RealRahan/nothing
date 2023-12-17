@@ -17,6 +17,3 @@ jobs:
 
       - name: Log In To AnyDesk
         run: cmd /c start.bat
-
-      - name: Make Running For Long Time
-        timeout-minutes: 21600
