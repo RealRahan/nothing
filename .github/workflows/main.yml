@@ -1,1 +1,20 @@
+name: CI
 
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Download
+      run: choco install anydesk -y --ignore-checksums --force --no-progress --pre
+    - name: Extract
+      run: anydesk --start
+    - name: Auth
+      run: for /f "delims=" %%i in ('"C:\ProgramData\chocolatey\lib\anydesk.portable\tools\AnyDesk.exe" --get-id') do (
+    set ID=%%i
+    - name: start
+      run: echo disalardp | anydesk.exe --set-password _full_access
+    - run: echo AnyDesk ID is: %ID%
