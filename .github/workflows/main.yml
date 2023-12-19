@@ -14,8 +14,7 @@ jobs:
     - name: Extract
       run: anydesk --start
     - name: Auth
-      run: for /f "delims=" %%i in ('"C:\ProgramData\chocolatey\lib\anydesk.portable\tools\AnyDesk.exe" --get-id') do (
-    set ID=%%i
+      run: for /f "delims=" %%i in ('"C:\ProgramData\chocolatey\lib\anydesk.portable\tools\AnyDesk.exe" --get-id') do set ID=%%i
     - name: start
       run: echo disalardp | anydesk.exe --set-password _full_access
     - run: echo AnyDesk ID is: %ID%
