@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <title>معلومات حساب تيك توك</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #181818;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            animation: rgbWave 10s linear infinite;
+        }
+
+        h1 a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+        }
+
+        @keyframes rgbWave {
+            0% { color: hsl(0, 100%, 50%); }
+            16.67% { color: hsl(60, 100%, 50%); }
+            33.33% { color: hsl(120, 100%, 50%); }
+            50% { color: hsl(180, 100%, 50%); }
+            66.67% { color: hsl(240, 100%, 50%); }
+            83.33% { color: hsl(300, 100%, 50%); }
+            100% { color: hsl(0, 100%, 50%); }
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            background-color: #383838;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.4em;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.2em;
+            background-color: #303030;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #424242;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        input[type="submit"]:active {
+            background-color: #545454;
+            transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1.4em;
+            /* Removed scrolling styles */
+            padding: 20px;
+            border-radius: 8px;
+            background-color: rgba(40, 40, 40, 0.7);
+        }
+
+        br {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        #output img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transform: scale(0);
+            opacity: 0.7;
+            animation: ripple-animation 0.5s ease-out;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Media query for smaller screens (phones) */
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                max-width: 95%;
+            }
+
+            input[type="text"], label, input[type="submit"], #output {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <h1><a href="https://www.tiktok.com/@r17s" target="_blank">بواسطة Rahan</a></h1>
+        </div>
+
+        <form method="POST" id="myForm">
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" name="username" id="username" value="{{ username or '' }}"><br><br>
+            <input type="submit" value="احصل على المعلومات">
+        </form>
+
+        <div id="output">
+            {{ output_text | safe }}
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('input[type="submit"]');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+
+                let ripples = document.createElement('span');
+                ripples.classList.add('ripple');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+
+                setTimeout(() => {
+                    ripples.remove();
+                }, 500);
+            })
+        })
+    </script>
+
+</body>
+</html>
